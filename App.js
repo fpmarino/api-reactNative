@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {Component, useState} from 'react';
 import { StyleSheet, Text, TextInput, ScrollView, TouchableOpacity, View } from 'react-native';
-import axios from 'axios';
+const axios = require("axios");
 
+  
 export default class App extends Component {
   state = {
 
@@ -39,16 +40,17 @@ export default class App extends Component {
 
 
   render(){
+    
     if(this.state.estado != true)
     {
    
       return (
-        <View style = {styles.container}>
+        <View style={styles.container}>
 
-        <Text style = {styles.text}>Buscar cerveceria</Text>
-        <TextInput style = {style.input} placeholder="Elegir cerveceria" onChangeText = {this.handlerText.bind(this)}></TextInput> 
+        <Text style={styles.text}>Buscar cerveceria</Text>
+        <TextInput style={style.input} placeholder="Elegir cerveceria" onChangeText = {this.handlerText.bind(this)}></TextInput> 
         <TouchableOpacity
-        style = {styles.button}
+        style={styles.button}
         onPress={this.handlerButton.bind(this)}>
         </TouchableOpacity>
           <ScrollView style={styles.scrollView}>
@@ -76,12 +78,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    color: "grey",
+    color: "#00a3b5",
     padding: 8,
   },
   button: {
     alignItems: "center",
-    backgroundColor: "red",
+    backgroundColor: "#7f8282",
     padding: 8,
     borderRadius: 20,
   },
@@ -90,14 +92,12 @@ const styles = StyleSheet.create({
     width: 200,
     margin: 15,
     padding: 8,
-    borderRadius: 20,	
-    borderColor: 'red',
+    borderColor: '#00a3b5',
     backgroundColor: 'white', 
     borderWidth: 2, 
   }, 
   scrollView: {
     backgroundColor: 'white',
-    //marginHorizontal: 20,
     padding: 15,
     marginTop: 20
   },
