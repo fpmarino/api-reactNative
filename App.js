@@ -3,7 +3,7 @@ import React, {Component, useState} from 'react';
 import { StyleSheet, Text, TextInput, ScrollView, TouchableOpacity, View } from 'react-native';
 const axios = require("axios");
 
-  
+ 
 export default class App extends Component {
   state = {
 
@@ -13,8 +13,8 @@ export default class App extends Component {
 
   handlerText(t)
   {
-    var text = t;
-    this.setState({value : text});
+    var buscar = t;
+    this.setState({value : buscar});
   }  
 
   handlerButton = () => 
@@ -43,16 +43,47 @@ export default class App extends Component {
     
     if(this.state.estado != true)
     {
+      const {style} = this.props;
    
       return (
         <View style={styles.container}>
 
-        <Text style={styles.text}>Buscar cerveceria</Text>
-        <TextInput style={style.input} placeholder="Elegir cerveceria" onChangeText = {this.handlerText.bind(this)}></TextInput> 
+        <Text style={styles.text}>Econtrá tu cervecería</Text>
+        <TextInput style={styles.input}  onChangeText = {this.handlerText.bind(this)}></TextInput> 
         <TouchableOpacity
         style={styles.button}
         onPress={this.handlerButton.bind(this)}>
+        <Text>Enviar</Text>
         </TouchableOpacity>
+        
+          <ScrollView style={styles.scrollView}>
+          <Text style={styles.text}>Nombre: {this.state.response.name}</Text>          
+          <Text style={styles.text}>Tipo de cerveceria: {this.state.response.brewery_type}</Text>
+          <Text style={styles.text}>Direccion: {this.state.response.street}</Text>
+          <Text style={styles.text}>Ciudad: {this.state.response.city}</Text>          
+          <Text style={styles.text}>Pais: {this.state.response.country}</Text>
+          <Text style={styles.text}>Telefono: {this.state.response.phone}</Text>
+          <Text style={styles.text}>Pagina Web: {this.state.response.website_url}</Text>
+          </ScrollView>
+          <StatusBar style="auto" />
+          
+        </View>             
+      );  
+    }else if (this.state.estado == true)
+    {
+      const {style} = this.props;
+   
+      return (
+        <View style={styles.container}>
+
+        <Text style={styles.text}>Econtrá tu cervecería</Text>
+        <TextInput style={styles.input}  onChangeText = {this.handlerText.bind(this)}></TextInput> 
+        <TouchableOpacity
+        style={styles.button}
+        onPress={this.handlerButton.bind(this)}>
+        <Text>Enviar</Text>
+        </TouchableOpacity>
+        
           <ScrollView style={styles.scrollView}>
           <Text style={styles.text}>Nombre: {this.state.response.name}</Text>          
           <Text style={styles.text}>Tipo de cerveceria: {this.state.response.brewery_type}</Text>
@@ -64,7 +95,9 @@ export default class App extends Component {
           </ScrollView>
           <StatusBar style="auto" />
         </View>             
-      );   }
+      );  
+    }
+
 
 }
 }
@@ -73,19 +106,23 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: '#ccccc8',
     alignItems: 'center',
     justifyContent: 'center',
+    padding:15,
+
   },
   text: {
     color: "#00a3b5",
-    padding: 8,
+    paddingTop: 30,
+    fontSize: 20,
+    marginRight:20,
   },
   button: {
     alignItems: "center",
     backgroundColor: "#7f8282",
-    padding: 8,
-    borderRadius: 20,
+    padding: 10,
+    paddingHorizontal: 40,
   },
   input: { 
     height: 35,
@@ -97,7 +134,7 @@ const styles = StyleSheet.create({
     borderWidth: 2, 
   }, 
   scrollView: {
-    backgroundColor: 'white',
+    backgroundColor: '#dededc',
     padding: 15,
     marginTop: 20
   },
